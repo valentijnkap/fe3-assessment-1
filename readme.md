@@ -2,7 +2,7 @@ Based on the example from [Mike Bostock](https://bl.ocks.org/mbostock/3885304)
 
 # Population of speakers of different languages
 
-[Banner][preview.png]
+![Banner][preview.png]
 
 The demo can be found [here](https://valentijnkap.github.io/fe3-assessment-1/).
 
