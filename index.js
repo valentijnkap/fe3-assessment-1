@@ -52,7 +52,8 @@ d3.tsv("index.tsv", function(d) {
 		.call(d3.axisLeft(y)
 			.tickFormat(function(d) { 
 				return formatSpeakers(d)
-			}))
+			})
+		)
 
 	g.selectAll(".bar")
 		.data(data)

@@ -8,7 +8,7 @@ The demo can be found [here](https://valentijnkap.github.io/fe3-assessment-1/).
 
 
 ## Background
-For this assessment I had to pick a dataset an visualize it in a basic chart from the [D3 Gallary](https://github.com/d3/d3/wiki/Gallery#basic-charts). The data set I picked showed the population of speakers of different languages. So I decided it could be visualized in a simple barchart en give it some detail along the way.
+For this assessment I had to pick a dataset and visualize it in a basic chart from the [D3 Gallary](https://github.com/d3/d3/wiki/Gallery#basic-charts). The data set I picked showed the population of speakers of different languages. So I decided it could be visualized in a simple barchart and give it some detail along the way.
 
 ### The data
 
@@ -44,9 +44,22 @@ Italian	66000000
 ```
 
 ## Changes
-The original data from the example was shown in a percentage. With my data I needed to show numbers in millions so I needed to change the value format. After searching for the solution i stumbeld on these sites and gave me the answer:
 
-https://github.com/d3/d3/issues/2241
+### Formating the values on the Y axis
+The original data from the example was shown in a percentage. With my data I needed to show numbers in millions so I needed to change the value format. After searching for the solution I stumbeld on issue on github where the exact same situation was solved. so I used the answer from [Micheal Bockstock](https://github.com/d3/d3/issues/2241). To get my values in millions I used the `d3.format()` function and write the following code:
+
+```javascript
+
+var formatSpeakers = d3.format(".3s")
+
+g.append("g")
+	.attr("class", "axis axis--y")
+	.call(d3.axisLeft(y)
+		.tickFormat(function(d) { 
+			return formatSpeakers(d)
+		})
+	)
+```
 
 The name of the languages where to lang so I had to rotate the text on the X axis. For that I Googled an solution that selected all the text elements within a group. I found that solution on:
 
