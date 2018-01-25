@@ -40,10 +40,9 @@ Yue Chinese	72000000
 Turkish	71000000
 Vietnamese	68000000
 Italian	66000000
-
 ```
 
-## Changes
+## The proces
 
 ### Formating the values on the Y axis
 The original data from the example was shown in a percentage. With my data I needed to show numbers in millions so I needed to change the value format. After searching for the solution I stumbeld on issue on github where the exact same situation was solved. so I used the answer from [Micheal Bockstock](https://github.com/d3/d3/issues/2241). To get my values in millions I used the `d3.format()` function and write the following code:
@@ -61,13 +60,44 @@ g.append("g")
 	)
 ```
 
-The name of the languages where to lang so I had to rotate the text on the X axis. For that I Googled an solution that selected all the text elements within a group. I found that solution on:
+### Rotating the labels on the X axis
+The name of the languages where to long so I wanted to rotate the text on the X axis. At first I tried to style it but the the whole X axis was rotated. I just wanted to rotate the text so I found an example from [Micheal Bockstock](https://bl.ocks.org/mbostock/4403522) who used this technique. Then I discoverd that I needed to select the text elements first instead of the whole group. To accomplishing the right rotating I used the `.selectAll("text")` selector and then apply the styles.
 
-https://bl.ocks.org/mbostock/4403522
 
-To make the chart even more readable I wanted to give the chart some tooltips. For that I found a similair barchart but with tooltips. I picked the code that just attached the tooltip to the bars.
+### Adding tooltips
+To make the chart even more readable I wanted to give the chart some tooltips. I found another chart from [David Andrés](https://bl.ocks.org/ayala-usma/d2f3b89c84e4ed66e22d02affcdcab73) who used tooltips on way that could be easily implemented. At first I started to create the tooltip itself and then activate with a `.on(mousemove)` and `.on(mouseout)` event.
 
-https://bl.ocks.org/ayala-usma/d2f3b89c84e4ed66e22d02affcdcab73
+Here's what I did:
+
+```javascript
+
+var tooltip = d3.select("body").append("div").attr("class", "toolTip")
+
+.on("mousemove", function(d){
+	d3.select(this).attr("fill", "#588C73")
+	tooltip
+		.style("left", d3.event.pageX - 50 + "px")// This wil make the mouse as starting point for the tooltip.
+		.style("top", d3.event.pageY - 70 + "px")// Same as this.
+		.style("display", "inline-block")
+		.html((d.language) + ": " + d.speakers)
+})
+// On the mouse out the bars will return in their original state.
+.on("mouseout", function(d){
+	d3.select(this).attr("fill", "#E27C29") 
+	tooltip.style("display", "none")
+})
+
+```
+
+
+## Features
+
+
+## To do's
+- [ ] Add some css to make it more appealing.
+- [ ] Fix the max on the Y axis so the bar won't go of the chart.
+- [ ] Add some labels to the axis end.
+
 
 ### LICENSE
 

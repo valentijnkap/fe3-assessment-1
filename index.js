@@ -18,7 +18,7 @@ var g = svg.append("g")
 var formatSpeakers = d3.format(".3s")
 
 // Add a tooltip to the body and store it for later use.
-var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+var tooltip = d3.select("body").append("div").attr("class", "toolTip")
 
 // load the the data and pass it back in a function.
 d3.tsv("index.tsv", function(d) {
